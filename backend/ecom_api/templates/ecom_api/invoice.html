@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+
+    <title>Ecommerce App</title>
+
+    <style>
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        a {
+            text-decoration: underline;
+        }
+
+        body {
+            position: relative;
+            margin: 0 auto;
+            color: #001028;
+            background: #FFFFFF;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-family: Arial;
+        }
+
+        header {
+            padding: 10px 0;
+            margin-bottom: 30px;
+        }
+
+        #logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #logo img {
+            width: 90px;
+        }
+
+        h1 {
+
+            color: #5D6975;
+            font-size: 2.4em;
+            line-height: 1.4em;
+            font-weight: normal;
+            text-align: center;
+            margin: 0 0 20px 0;
+        }
+
+        #project {
+            float: left;
+        }
+
+        #project span {
+            color: #5D6975;
+            text-align: right;
+            width: 52px;
+            margin-right: 10px;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        #company {
+            float: right;
+            text-align: right;
+        }
+
+        #project div,
+        #company div {
+            white-space: nowrap;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+
+
+
+        table th,
+        table td {
+            text-align: center;
+        }
+
+        table th {
+
+
+            color: #5D6975;
+            border-bottom: 1px solid #C1CED9;
+            white-space: nowrap;
+            font-weight: normal;
+        }
+
+        table .service,
+        table .desc {
+            text-align: left;
+        }
+
+        table td {
+            padding-top: 5px;
+            padding-bottom: 5px;
+
+        }
+
+        table tr {
+            border-bottom: 1px solid #C1CED9;
+        }
+
+        table td.service,
+        table td.desc {
+            vertical-align: top;
+        }
+
+        table td.unit,
+        table td.qty,
+        table td.total {
+            font-size: 1.2em;
+        }
+
+        table td.grand {
+            border-top: 1px solid #5D6975;
+            ;
+        }
+
+        #notices .notice {
+            color: #5D6975;
+            font-size: 1.2em;
+        }
+
+        footer {
+            color: #5D6975;
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            bottom: 0;
+            border-top: 1px solid #C1CED9;
+            padding: 8px 0;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <header class="clearfix">
+
+        <div id="logo" style="display:flex; justify-content:center; align-items:center;">
+            <img src="C:\Users\Dhiraj\Desktop\ecommerce_with_drf\backend\static\images\ecom_brand_logo.png" class="brand-logo" width=60 height=60>
+            <h2 class="brand-name">EcommerceApp</h2>
+        </div>
+
+        <h3>ORDER PAYMENT INVOICE</h3>
+
+        <div id="company" class="clearfix">
+            <div>Ecommerce App</div>
+            <div><a href="mailto:ecommerceapp@example.com">ecommerceapp@example.com</a></div>
+            <div><a href="www.ecommerceapp.np:8000">www.ecommerceapp.np:8000</a></div>
+        </div>
+
+        <div id="project">
+            <div><span>CUSTOMER : </span> {{username}}</div>
+            <div><span>EMAIL : </span> <a href="mailto:{{email}}">{{email}}</a></div>
+            <div><span>PAYMENT DATE : </span> {{paidAt}}</div>
+            <div><span>PAYMENT METHOD : </span> {{paymentMethod}}</div>
+            <div><span>TAX PRICE : </span> {{taxPrice}}</div>
+            <div><span>SHIPPING PRICE : </span> {{shippingPrice}}</div>
+            <div><span>TOTAL PRICE : </span> {{totalPrice}}</div>
+            <div><span>ESEWA REFERENCE ID : </span> {{refId}}</div>
+        </div>
+        <br>
+        <br>
+    </header>
+    <div class="table-container" style="overflow-x:auto">
+        <table class="table" style="width:100%; text-align:center;">
+            <thead>
+                <tr>
+                    <th scope="col">PRODUCT</th>
+                    <th scope="col">QUANTITY</th>
+                    <th scope="col">PRICE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in order.orderitem_set.all %}
+                <tr>
+                    <td scope="row"> {{i.product}} </td>
+                    <td> {{i.qty}} </td>
+                    <td> {{i.price}} </td>
+
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td scope="row">TAX PRICE : {{taxPrice}}</td>
+                    <td>SHIPPING PRICE : {{shippingPrice}}</td>
+                    <td>TOTAL AMOUNT : {{totalPrice}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <p style="text-align:right; font-size:12px;"> * All the value is in NPR currency
+    <p>
+</body>
+
+</html>
